@@ -44,8 +44,10 @@ const createUsers = async (req, res) => {
   };
   
   const updateUsers = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+      res.status(400).json('Must use a valid user id to update a user');
+    }
     const userId = new ObjectId(req.params.id);
-    // be aware of updateOne if you only want to update specific fields
     const contact = {
         name: req.body.name,
         last_name: req.body.last_name,

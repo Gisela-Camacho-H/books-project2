@@ -45,8 +45,10 @@ const createBooks = async (req, res) => {
   };
   
   const updateBooks = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+      res.status(400).json('Must use a valid book id to update a book');
+    }
     const userId = new ObjectId(req.params.id);
-    // be aware of updateOne if you only want to update specific fields
     const contact = {
       title: req.body.title,
       description: req.body.description,
