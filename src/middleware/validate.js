@@ -3,12 +3,12 @@ const validator = require('../helpers/validator');
 const saveUser = (req, res, next) => {
   const validationRule = {
 
-    name: 'required|string',
+    name: 'required|string|size:3',
     last_name: 'required|string',
     nickname: 'string',
     email: 'required|email',
-    password: 'required|string',
-    phone: 'string',
+    password: 'required|string|size:6',
+    phone: 'numeric',
     birthday: 'string'
   };
   validator(req.body, validationRule, {}, (err, status) => {
@@ -27,9 +27,9 @@ const saveUser = (req, res, next) => {
 const saveBook = (req, res, next) => {
     const validationRule = {
   
-    title: 'required|string',
+    title: 'required|string|size:3',
     description: 'string',
-    author: 'required|string',
+    author: 'required|string|size:4',
     imagePath: 'required|string',
     details: 'string',
     aboutAuthor: 'string',
