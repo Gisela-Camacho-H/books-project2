@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const gamesController = require('../controllers/users');
+const booksController = require('../controllers/users');
 const validation = require('../middleware/validate');
 
-router.get('/', gamesController.getAll);
+router.get('/', booksController.getAll);
 
-router.get('/:id', gamesController.getSingle);
+router.get('/:id', booksController.getSingle);
 
-router.post('/', validation.saveUser,  gamesController.createUsers);
+router.post('/', validation.saveUser,  booksController.createUsers);
 
-router.put('/:id', validation.saveUser, gamesController.updateUsers);
+router.put('/:id', validation.saveUser, booksController.updateUsers);
 
-router.delete('/:id', gamesController.deleteUsers);
+router.delete('/:id', booksController.deleteUsers);
 
 module.exports = router;
