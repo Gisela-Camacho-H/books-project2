@@ -1,6 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
+const {auth} = require('express-openid-connect');
+require('dotenv').config();
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.CLIENT_ID,
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
+    secret: process.env.SECRET
+  };
+
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -16,6 +28,13 @@ app
     next();
   })
   .use('/', require('./routes'));
+app.use(auth(config));
+
+app.get('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  });
+
+
 
   process.on('uncaughtException', (err, origin) => {
     console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);

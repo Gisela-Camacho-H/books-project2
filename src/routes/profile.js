@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const booksController = require('../controllers/profile');
+const profileController = require('../controllers/profile');
 
-router.use(booksController.auth(booksController.config));
-router.get('/', booksController.isUserAuthenticaded);
+router.use(profileController.auth(booksController.config));
+router.get('/', profileController.isUserAuthenticaded);
 
-router.get('/profile', booksController.requiresAuth(), booksController.getProfile);
+router.get('/profile', profileController.requiresAuth(), booksController.getProfile);
 
 module.exports = router;
