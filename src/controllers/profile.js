@@ -1,6 +1,6 @@
 const {requiresAuth} = require('express-openid-connect');
 
-var getProfile = (req, res) => {
+const getProfile = async (req, res) => {
     res.send(JSON.stringify(req.oidc.user, null, 2));
   }
 
