@@ -343,7 +343,7 @@
         }
       }
     },
-    "/profile/profile": {
+    "/profile/": {
       "get": {
         "description": "",
         "parameters": [],
