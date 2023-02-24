@@ -33,9 +33,9 @@ app.use(auth(config));
 app.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   });
-app.get('/profile', requiresAuth(), (res, req) => {
+app.get('/profile', requiresAuth(), (req , res) => {
   res.send(JSON.stringify(res.oidc.user));
-})
+});
 
 
   process.on('uncaughtException', (err, origin) => {
