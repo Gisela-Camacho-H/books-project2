@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
-const {auth} = require('express-openid-connect');
+const {auth, requiresAuth} = require('express-openid-connect');
 require('dotenv').config();
 
 const config = {
@@ -33,7 +33,9 @@ app.use(auth(config));
 app.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   });
-
+app.get('/profile', requiresAuth(), (res, res) => {
+  res.send(JSON.stringify(res.oidc.user));
+})
 
 
   process.on('uncaughtException', (err, origin) => {
